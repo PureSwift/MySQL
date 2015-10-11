@@ -34,6 +34,11 @@ public final class MySQL {
         return String.fromCString(mysql_error(internalPointer))
     }
     
+    public var hostInfo: String? {
+        
+        return String.fromCString(mysql_get_host_info(internalPointer))
+    }
+    
     // MARK: - Private Properties
     
     private let internalPointer = UnsafeMutablePointer<MYSQL>()
@@ -91,27 +96,29 @@ public final class MySQL {
     
     // MARK: Query
     
-    public func executeQuery(query: String) throws {
+    public func executeQuery(query: String) throws -> [[(Field, Data)]]? {
         
         guard mysql_exec_sql(internalPointer, query) == 0
             else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
-    }
-    
-    public func getResults() throws -> [[String]]? {
+        
+        // get result... 
         
         let mysqlResult = mysql_store_result(internalPointer)
         
         guard mysqlResult != nil else {
             
+            // make sure it was really an empty result
+            // http://dev.mysql.com/doc/refman/5.0/en/null-mysql-store-result.html
+            
             guard mysql_field_count(internalPointer) == 0
-                else { throw Error.BadResult }
+                else { throw MySQL.Error.BadResult }
             
             return nil
         }
         
         defer { mysql_free_result(mysqlResult) }
         
-        var rowResults = [[String]]()
+        var rowResults = [[(Field, Data)]]()
         
         var row: MYSQL_ROW
         
@@ -121,18 +128,23 @@ public final class MySQL {
             
             let numberOfFields = mysql_num_fields(mysqlResult)
             
-            let lastIndex = Int(numberOfFields - 1)
+            let fieldLengths = mysql_fetch_lengths(mysqlResult)
             
-            var fields = [String]()
+            let lastFieldIndex = Int(numberOfFields - 1)
             
-            for i in 0...lastIndex {
+            var fields = [Data]()
+            
+            for i in 0...lastFieldIndex {
                 
-                let value = row[i]
+                let fieldValuePointer = row[i]
                 
-                guard let string = String.fromCString(value)
-                    else { fatalError("Could not create string from C String") }
-        
-                fields.append(string)
+                let fieldLength = fieldLengths[i]
+                
+                let field = mysql_fetch_field_direct(mysqlResult, UInt32(i))
+                
+                let data = DataFromBytePointer(fieldValuePointer, length: Int(fieldLength))
+                
+                fields.append(data)
             }
             
             rowResults.append(fields)

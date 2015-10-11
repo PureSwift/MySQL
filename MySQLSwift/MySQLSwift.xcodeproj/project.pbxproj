@@ -15,6 +15,8 @@
 		1A38076C1BCA2A39003F8492 /* ClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38076B1BCA2A39003F8492 /* ClientOption.swift */; settings = {ASSET_TAGS = (); }; };
 		1A38076E1BCA2E31003F8492 /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38076D1BCA2E31003F8492 /* ClientError.swift */; settings = {ASSET_TAGS = (); }; };
 		1A3807701BCAD06F003F8492 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38076F1BCAD06F003F8492 /* Error.swift */; settings = {ASSET_TAGS = (); }; };
+		1A3807721BCAEDF8003F8492 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3807711BCAEDF8003F8492 /* Field.swift */; settings = {ASSET_TAGS = (); }; };
+		1A3807741BCAF0BA003F8492 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3807731BCAF0BA003F8492 /* Result.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -112,6 +114,8 @@
 		1A38076B1BCA2A39003F8492 /* ClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientOption.swift; sourceTree = "<group>"; };
 		1A38076D1BCA2E31003F8492 /* ClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 		1A38076F1BCAD06F003F8492 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		1A3807711BCAEDF8003F8492 /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
+		1A3807731BCAF0BA003F8492 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +164,8 @@
 				1A3806FE1BCA2006003F8492 /* MySQLSwift.h */,
 				1A38071B1BCA209E003F8492 /* module.map */,
 				1A38071E1BCA2366003F8492 /* MySQL.swift */,
+				1A3807731BCAF0BA003F8492 /* Result.swift */,
+				1A3807711BCAEDF8003F8492 /* Field.swift */,
 				1A38076F1BCAD06F003F8492 /* Error.swift */,
 				1A38076B1BCA2A39003F8492 /* ClientOption.swift */,
 				1A38076D1BCA2E31003F8492 /* ClientError.swift */,
@@ -381,6 +387,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1A3807741BCAF0BA003F8492 /* Result.swift in Sources */,
+				1A3807721BCAEDF8003F8492 /* Field.swift in Sources */,
 				1A3807701BCAD06F003F8492 /* Error.swift in Sources */,
 				1A38076E1BCA2E31003F8492 /* ClientError.swift in Sources */,
 				1A38076C1BCA2A39003F8492 /* ClientOption.swift in Sources */,
@@ -578,6 +586,7 @@
 				1A3807111BCA2006003F8492 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1A3807121BCA2006003F8492 /* Build configuration list for PBXNativeTarget "MySQLSwiftTests" */ = {
 			isa = XCConfigurationList;
@@ -586,6 +595,7 @@
 				1A3807141BCA2006003F8492 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
