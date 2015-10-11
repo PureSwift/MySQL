@@ -1,0 +1,4 @@
+module mysql [system] {
+  header "/usr/local/include/mysql/mysql.h"
+  export *
+}
