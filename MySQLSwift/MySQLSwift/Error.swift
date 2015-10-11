@@ -12,5 +12,8 @@ public extension MySQL {
         
         /// ```mysql_store_result()``` should have returned data
         case BadResult
+        
+        /// Could not fetch the entire result. 
+        case NotEndOfFile
     }
 }

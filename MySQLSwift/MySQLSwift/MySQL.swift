@@ -97,7 +97,7 @@ public final class MySQL {
             else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
     }
     
-    public func getResults() throws -> [[Data]]? {
+    public func getResults() throws -> [[String]]? {
         
         let mysqlResult = mysql_store_result(internalPointer)
         
@@ -111,7 +111,7 @@ public final class MySQL {
         
         defer { mysql_free_result(mysqlResult) }
         
-        var rowResults = [[Data]]()
+        var rowResults = [[String]]()
         
         var row: MYSQL_ROW
         
@@ -123,23 +123,24 @@ public final class MySQL {
             
             let lastIndex = Int(numberOfFields - 1)
             
-            var fieldsData = [Data]()
+            var fields = [String]()
             
             for i in 0...lastIndex {
                 
                 let value = row[i]
                 
-                var data = Data()
-                
-                // get data from char array
-                
-                
-                fieldsData.append(data)
+                guard let string = String.fromCString(value)
+                    else { fatalError("Could not create string from C String") }
+        
+                fields.append(string)
             }
             
-            rowResults.append(fieldsData)
+            rowResults.append(fields)
             
         } while row != nil
+        
+        guard mysql_eof(mysqlResult) != 0
+            else { throw Error.NotEndOfFile }
         
         return rowResults
     }
@@ -152,4 +153,3 @@ public final class MySQL {
 @asmname("mysql_drop_db") func mysql_drop_db(mysql: UnsafeMutablePointer<MYSQL>, _ database: UnsafePointer<CChar>) -> Int32
 
 @asmname("mysql_exec_sql") func mysql_exec_sql(mysql: UnsafeMutablePointer<MYSQL>, _ SQL: UnsafePointer<CChar>) -> Int32
-
