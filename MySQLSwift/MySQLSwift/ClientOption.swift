@@ -1,5 +1,5 @@
 //
-//  ClientFlag.swift
+//  ClientOption.swift
 //  MySQLSwift
 //
 //  Created by Alsey Coleman Miller on 10/11/15.
@@ -7,6 +7,7 @@
 //
 
 //import SwiftFoundation
+import mysql
 
 public enum ClientOption/*: OptionsBitmask*/ {
     
@@ -62,4 +63,14 @@ public enum ClientOption/*: OptionsBitmask*/ {
     /// calls before trying to connect again. 
     /// With this option, the ```mysql_options()``` calls need not be repeated.
     case RememberOptions
+    
+    public var rawValue: Int32 {
+        
+        switch self {
+            
+        case .Compress:     return CLIENT_COMPRESS
+        case .FoundRows:    return CLIENT_FOUND_ROWS
+        
+        }
+    }
 }

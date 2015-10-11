@@ -27,7 +27,8 @@ public final class MySQL {
     
     // MARK: - Properties
     
-    public var error: String? {
+    /// Human readable error string for the last error produced (if any).
+    public var errorString: String? {
         
         return String.fromCString(mysql_error(internalPointer))
     }
@@ -51,9 +52,26 @@ public final class MySQL {
     // MARK: - Methods
     
     /// Attempts to establish a connection to a MySQL database engine.
-    public func connect(host: String? = nil, user: String? = nil, password: String? = nil, database: String? = nil, port: UInt = 0, socket: String? = nil, clientFlag: ULONG = 0) {
+    public func connect(host: String, user: String, password: String, database: String? = nil, port: UInt32 = 0, options: [ClientOption] = []) throws {
         
+        let clientFlags: UInt32 = 0
         
+        if let database = database {
+            
+            guard mysql_real_connect(internalPointer, host, user, password, database, port, nil, clientFlags) != nil
+                else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+        }
+        else {
+            
+            guard mysql_real_connect(internalPointer, host, user, password, nil, port, nil, clientFlags) != nil
+                else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+        }
+    }
+    
+    public func selectDatabase(database: String) throws {
+        
+        guard mysql_select_db(internalPointer, database) == 0
+            else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
     }
 }
 

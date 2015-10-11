@@ -12,7 +12,7 @@
 		1A38070B1BCA2006003F8492 /* MySQLSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38070A1BCA2006003F8492 /* MySQLSwiftTests.swift */; };
 		1A38071A1BCA208C003F8492 /* libmysqlclient.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3807191BCA208C003F8492 /* libmysqlclient.dylib */; settings = {ASSET_TAGS = (); }; };
 		1A38071F1BCA2366003F8492 /* MySQL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38071E1BCA2366003F8492 /* MySQL.swift */; settings = {ASSET_TAGS = (); }; };
-		1A38076C1BCA2A39003F8492 /* ClientFlag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38076B1BCA2A39003F8492 /* ClientFlag.swift */; settings = {ASSET_TAGS = (); }; };
+		1A38076C1BCA2A39003F8492 /* ClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38076B1BCA2A39003F8492 /* ClientOption.swift */; settings = {ASSET_TAGS = (); }; };
 		1A38076E1BCA2E31003F8492 /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38076D1BCA2E31003F8492 /* ClientError.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
@@ -108,7 +108,7 @@
 		1A3807681BCA24F7003F8492 /* sslopt-longopts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sslopt-longopts.h"; sourceTree = "<group>"; };
 		1A3807691BCA24F7003F8492 /* sslopt-vars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sslopt-vars.h"; sourceTree = "<group>"; };
 		1A38076A1BCA24F7003F8492 /* typelib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typelib.h; sourceTree = "<group>"; };
-		1A38076B1BCA2A39003F8492 /* ClientFlag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientFlag.swift; sourceTree = "<group>"; };
+		1A38076B1BCA2A39003F8492 /* ClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientOption.swift; sourceTree = "<group>"; };
 		1A38076D1BCA2E31003F8492 /* ClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -158,7 +158,7 @@
 				1A3806FE1BCA2006003F8492 /* MySQLSwift.h */,
 				1A38071B1BCA209E003F8492 /* module.map */,
 				1A38071E1BCA2366003F8492 /* MySQL.swift */,
-				1A38076B1BCA2A39003F8492 /* ClientFlag.swift */,
+				1A38076B1BCA2A39003F8492 /* ClientOption.swift */,
 				1A38076D1BCA2E31003F8492 /* ClientError.swift */,
 				1A3807001BCA2006003F8492 /* Info.plist */,
 			);
@@ -379,7 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A38076E1BCA2E31003F8492 /* ClientError.swift in Sources */,
-				1A38076C1BCA2A39003F8492 /* ClientFlag.swift in Sources */,
+				1A38076C1BCA2A39003F8492 /* ClientOption.swift in Sources */,
 				1A38071F1BCA2366003F8492 /* MySQL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
