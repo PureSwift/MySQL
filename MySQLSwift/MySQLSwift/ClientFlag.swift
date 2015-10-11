@@ -6,9 +6,9 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-import SwiftFoundation
+//import SwiftFoundation
 
-public enum ClientOption: OptionsBitmask {
+public enum ClientOption/*: OptionsBitmask*/ {
     
     /// Use compression protocol.
     case Compress
