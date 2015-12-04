@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-import mysql
+import mysqlclient
 
 public enum ClientError: UInt32, ErrorType, RawRepresentable {
     

@@ -6,8 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-import mysql
-import SwiftFoundation
+import mysqlclient
 
 public final class MySQL {
     
@@ -50,9 +49,9 @@ public final class MySQL {
         mysql_close(internalPointer)
     }
     
-    public init?() {
+    public init() {
         
-        guard mysql_init(internalPointer) != nil else { return nil }
+        guard mysql_init(internalPointer) != nil else { fatalError("Could not initialize MySQL") }
     }
     
     // MARK: - Methods
@@ -140,7 +139,7 @@ public final class MySQL {
                 
                 let fieldLength = fieldLengths[i]
                 
-                let field = mysql_fetch_field_direct(mysqlResult, UInt32(i))
+                let field = x(mysqlResult, UInt32(i))
                 
                 let data = DataFromBytePointer(fieldValuePointer, length: Int(fieldLength))
                 
@@ -158,7 +157,9 @@ public final class MySQL {
     }
 }
 
-// MARK: - Function Definitions
+// MARK: - Definitions
+
+public typealias Data = [UInt8]
 
 @asmname("mysql_create_db") func mysql_create_db(mysql: UnsafeMutablePointer<MYSQL>, _ database: UnsafePointer<CChar>) -> Int32
 

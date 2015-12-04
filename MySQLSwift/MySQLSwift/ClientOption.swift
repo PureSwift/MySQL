@@ -7,7 +7,7 @@
 //
 
 //import SwiftFoundation
-import mysql
+import mysqlclient
 
 public enum ClientOption/*: OptionsBitmask*/ {
     
@@ -70,6 +70,8 @@ public enum ClientOption/*: OptionsBitmask*/ {
             
         case .Compress:     return CLIENT_COMPRESS
         case .FoundRows:    return CLIENT_FOUND_ROWS
+            
+        default: fatalError("")
         
         }
     }
