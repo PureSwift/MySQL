@@ -38,28 +38,31 @@ public extension MySQL {
         
         public init() {
             
-            guard mysql_init(internalPointer) != nil else { fatalError("Could not initialize MySQL") }
+            guard mysql_init(internalPointer) != nil else { fatalError("Could not initialize MySQL handler") }
         }
         
         // MARK: - Methods
         
         /// Attempts to establish a connection to a MySQL database engine.
-        public func connect(host: String, user: String, password: String, database: String? = nil, port: UInt32 = 0, options: [ClientOption] = []) throws {
+        public func connect(host: String? = nil, user: String? = nil, password: String? = nil, db: String? = nil, port: UInt32 = 0, socket: String? = nil, flag: UInt = 0) throws -> Bool {
             
-            let clientFlags: UInt = 0
+            let hostOrBlank = convertString(host)
+            let userOrBlank = convertString(user)
+            let passwordOrBlank = convertString(password)
+            let dbOrBlank = convertString(db)
+            let socketOrBlank = convertString(socket)
             
-            if let database = database {
-                
-                guard mysql_real_connect(internalPointer, host, user, password, database, port, nil, clientFlags) != nil
-                    else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+            defer {
+                cleanConvertedString(hostOrBlank)
+                cleanConvertedString(userOrBlank)
+                cleanConvertedString(passwordOrBlank)
+                cleanConvertedString(dbOrBlank)
+                cleanConvertedString(socketOrBlank)
             }
-            else {
-                
-                guard mysql_real_connect(internalPointer, host, user, password, nil, port, nil, clientFlags) != nil
-                    else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
-            }
+            
+            guard mysql_real_connect(internalPointer, hostOrBlank.0, userOrBlank.0, passwordOrBlank.0, dbOrBlank.0, port, socketOrBlank.0, flag) != nil else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
         }
-        
+    
         // MARK: Database Operations
         
         public func selectDatabase(database: String) throws {
@@ -68,6 +71,8 @@ public extension MySQL {
                 else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
         }
         
+        // Methods deprecated
+        /*
         public func createDatabase(database: String) throws {
             
             guard mysql_create_db(internalPointer, database) == 0
@@ -78,13 +83,67 @@ public extension MySQL {
             
             guard mysql_drop_db(internalPointer, database) == 0
                 else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+        }*/
+        
+        public func listTables(wild: String? = nil) throws -> [String] {
+            
+            var names = [String]()
+            
+            let resultPointer = (wild == nil ? mysql_list_tables(internalPointer, nil) : mysql_list_tables(internalPointer, wild!))
+            
+            guard resultPointer != nil else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+            
+            defer { mysql_free_result(resultPointer) }
+            
+            var rowPointer = mysql_fetch_row(resultPointer)
+            
+            while rowPointer != nil {
+                
+                let name = String.fromCString(rowPointer[0])!
+                
+                names.append(name)
+                
+                // fetch next row
+                rowPointer = mysql_fetch_row(resultPointer)
+            }
+            
+            return names
+        }
+        
+        public func listDatabases(wild: String? = nil) throws -> [String] {
+            
+            var names = [String]()
+            
+            let resultPointer = (wild == nil ? mysql_list_dbs(internalPointer, nil) : mysql_list_dbs(internalPointer, wild!))
+            
+            guard resultPointer != nil else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+            
+            defer { mysql_free_result(resultPointer) }
+            
+            var rowPointer = mysql_fetch_row(resultPointer)
+            
+            while rowPointer != nil {
+                
+                let name = String.fromCString(rowPointer[0])!
+                
+                names.append(name)
+                
+                // fetch next row
+                rowPointer = mysql_fetch_row(resultPointer)
+            }
+            
+            return names
         }
         
         // MARK: Query
         
-        public func executeQuery(query: String) throws -> Result? {
+        public func query(query: String) throws -> Result? {
             
-            guard mysql_exec_sql(internalPointer, query) == 0
+            let convertedQueryString = convertString(query)
+            
+            defer { cleanConvertedString(convertedQueryString) }
+            
+            guard mysql_real_query(internalPointer, query, UInt(convertedQueryString.1)) == 0
                 else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
             
             // get result...
@@ -103,44 +162,7 @@ public extension MySQL {
             }
             
             return Result(internalPointer: mysqlResult)
-            
-            // Other
-            
-            var rowResults = [[(Data)]]()
-            
-            var row: MYSQL_ROW
-            
-            repeat {
-                
-                row = mysql_fetch_row(mysqlResult)
-                
-                let numberOfFields = mysql_num_fields(mysqlResult)
-                
-                let fieldLengths = mysql_fetch_lengths(mysqlResult)
-                
-                let lastFieldIndex = Int(numberOfFields - 1)
-                
-                var fields = [Data]()
-                
-                for i in 0...lastFieldIndex {
-                    
-                    let fieldValuePointer = row[i]
-                    
-                    let fieldLength = fieldLengths[i]
-                    
-                    let data = DataFromBytePointer(fieldValuePointer, length: Int(fieldLength))
-                    
-                    fields.append(data)
-                }
-                
-                rowResults.append(fields)
-                
-            } while row != nil
-            
-            guard mysql_eof(mysqlResult) != 0
-                else { throw Error.NotEndOfFile }
-            
-            return rowResults
         }
     }
 }
+

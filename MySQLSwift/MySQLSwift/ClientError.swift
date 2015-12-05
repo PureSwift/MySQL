@@ -10,9 +10,20 @@ import mysqlclient
 
 public extension MySQL {
     
+    /// [Client Error Codes](http://dev.mysql.com/doc/refman/5.7/en/error-messages-client.html#error_cr_commands_out_of_sync)
+    ///
+    /// Client error information comes from the following source files:
+    ///
+    /// The Error values and the symbols in parentheses correspond to definitions in the ```include/errmsg.h``` MySQL source file.
+    ///
+    /// The Message values correspond to the error messages that are listed in the ```libmysql/errmsg.c``` file.
+    /// ```%d``` and ```%s``` represent numbers and strings, respectively, that are substituted into the messages when
+    /// they are displayed.
     public enum ClientError: UInt32, ErrorType, RawRepresentable {
         
         /// Unknown MySQL error
+        ///
+        /// [CR_UNKNOWN_ERROR](http://dev.mysql.com/doc/refman/5.7/en/error-messages-client.html#error_cr_unknown_error)
         case Unknown = 2000
         
         /// Can't create UNIX socket (%d)
@@ -55,5 +66,6 @@ public extension MySQL {
         case ServerLost
     }
 }
+
 
 

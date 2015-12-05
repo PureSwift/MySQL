@@ -43,14 +43,14 @@ public extension MySQL {
             return lengths
         }()
         
-        public var rows: RowGenerator {
+        public var rows: Rows {
             
-            return RowGenerator(result: self)
+            return Rows(result: self)
         }
         
-        public var fields: FieldGenerator {
+        public var fields: Fields {
             
-            return FieldGenerator(result: self)
+            return Fields(result: self)
         }
         
         // MARK: - Private Properties
@@ -102,7 +102,7 @@ public extension MySQL {
 public extension MySQL.Result {
     
     /// Sequence of rows. (Enumeration interface)
-    public struct RowGenerator: GeneratorType {
+    public struct Rows: GeneratorType {
         
         public let result: MySQL.Result
         
@@ -127,7 +127,7 @@ public extension MySQL.Result {
 public extension MySQL.Result {
     
     /// Sequence of fields. (Enumeration interface)
-    public struct FieldGenerator: CollectionType {
+    public struct Fields: CollectionType {
         
         public typealias Index = Int
         
@@ -136,6 +136,16 @@ public extension MySQL.Result {
         public var count: Int {
             
             return result.fieldCount
+        }
+        
+        public var startIndex: Int {
+            
+            return 0
+        }
+        
+        public var endIndex: Int {
+            
+            return count + 1
         }
         
         private init(result: MySQL.Result) {

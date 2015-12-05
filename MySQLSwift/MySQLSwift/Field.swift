@@ -63,7 +63,7 @@ public extension MySQL {
         /// ```max_length``` is 7 (the length of '```-12.345```').
         public var maxLength: UInt
         
-        public var flags: [Flag]
+        //public var flags: [Flag]
     }
 }
 
@@ -73,6 +73,14 @@ internal extension MySQL.Field {
     
     internal init(internalPointer: UnsafeMutablePointer<MYSQL_FIELD>) {
         
-        
+        self.name = String.fromCString(internalPointer.memory.name)!
+        self.originalName = String.fromCString(internalPointer.memory.org_name)!
+        self.table = String.fromCString(internalPointer.memory.table)!
+        self.originalTable = String.fromCString(internalPointer.memory.org_table)!
+        self.database = String.fromCString(internalPointer.memory.db)!
+        self.catalog = String.fromCString(internalPointer.memory.catalog)!
+        self.length = internalPointer.memory.length
+        self.maxLength = internalPointer.memory.max_length
     }
 }
+

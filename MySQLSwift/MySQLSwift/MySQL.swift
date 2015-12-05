@@ -25,11 +25,3 @@ public final class MySQL {
         return mysql_get_client_version()
     }
 }
-
-// MARK: - Definitions
-
-@asmname("mysql_create_db") func mysql_create_db(mysql: UnsafeMutablePointer<MYSQL>, _ database: UnsafePointer<CChar>) -> Int32
-
-@asmname("mysql_drop_db") func mysql_drop_db(mysql: UnsafeMutablePointer<MYSQL>, _ database: UnsafePointer<CChar>) -> Int32
-
-@asmname("mysql_exec_sql") func mysql_exec_sql(mysql: UnsafeMutablePointer<MYSQL>, _ SQL: UnsafePointer<CChar>) -> Int32
