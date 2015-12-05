@@ -16,7 +16,11 @@
 		1A38076E1BCA2E31003F8492 /* ClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38076D1BCA2E31003F8492 /* ClientError.swift */; };
 		1A3807701BCAD06F003F8492 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A38076F1BCAD06F003F8492 /* Error.swift */; };
 		1A3807721BCAEDF8003F8492 /* Field.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3807711BCAEDF8003F8492 /* Field.swift */; };
+		6E1F28301C127F2700A0313B /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1F282F1C127F2700A0313B /* Row.swift */; };
+		6E1F28321C12839C00A0313B /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1F28311C12839C00A0313B /* Connection.swift */; };
+		6E1F28361C128F4500A0313B /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E1F28351C128F4500A0313B /* Data.swift */; };
 		6EC0A5581C122E99005C1BC0 /* DataType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC0A5571C122E99005C1BC0 /* DataType.swift */; };
+		6EC0A5591C1233D3005C1BC0 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A3807731BCAF0BA003F8492 /* Result.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +120,9 @@
 		1A38076F1BCAD06F003F8492 /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		1A3807711BCAEDF8003F8492 /* Field.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Field.swift; sourceTree = "<group>"; };
 		1A3807731BCAF0BA003F8492 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		6E1F282F1C127F2700A0313B /* Row.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Row.swift; sourceTree = "<group>"; };
+		6E1F28311C12839C00A0313B /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		6E1F28351C128F4500A0313B /* Data.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		6EC0A5571C122E99005C1BC0 /* DataType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataType.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -165,7 +172,10 @@
 				1A3806FE1BCA2006003F8492 /* MySQLSwift.h */,
 				1A38071B1BCA209E003F8492 /* module.map */,
 				1A38071E1BCA2366003F8492 /* MySQL.swift */,
+				6E1F28351C128F4500A0313B /* Data.swift */,
+				6E1F28311C12839C00A0313B /* Connection.swift */,
 				1A3807731BCAF0BA003F8492 /* Result.swift */,
+				6E1F282F1C127F2700A0313B /* Row.swift */,
 				1A3807711BCAEDF8003F8492 /* Field.swift */,
 				1A38076F1BCAD06F003F8492 /* Error.swift */,
 				1A38076B1BCA2A39003F8492 /* ClientOption.swift */,
@@ -233,7 +243,7 @@
 				1A38076A1BCA24F7003F8492 /* typelib.h */,
 			);
 			name = mysql;
-			path = ../../../../../../usr/local/Cellar/mysql/5.6.26/include/mysql;
+			path = ../../../../../../usr/local/Cellar/mysql/5.6.27/include/mysql;
 			sourceTree = "<group>";
 		};
 		1A3807391BCA24F7003F8492 /* mysql */ = {
@@ -390,9 +400,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A3807721BCAEDF8003F8492 /* Field.swift in Sources */,
+				6E1F28361C128F4500A0313B /* Data.swift in Sources */,
+				6E1F28321C12839C00A0313B /* Connection.swift in Sources */,
 				6EC0A5581C122E99005C1BC0 /* DataType.swift in Sources */,
 				1A3807701BCAD06F003F8492 /* Error.swift in Sources */,
 				1A38076E1BCA2E31003F8492 /* ClientError.swift in Sources */,
+				6E1F28301C127F2700A0313B /* Row.swift in Sources */,
+				6EC0A5591C1233D3005C1BC0 /* Result.swift in Sources */,
 				1A38076C1BCA2A39003F8492 /* ClientOption.swift in Sources */,
 				1A38071F1BCA2366003F8492 /* MySQL.swift in Sources */,
 			);
