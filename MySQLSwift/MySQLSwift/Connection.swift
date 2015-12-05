@@ -44,7 +44,7 @@ public extension MySQL {
         // MARK: - Methods
         
         /// Attempts to establish a connection to a MySQL database engine.
-        public func connect(host: String? = nil, user: String? = nil, password: String? = nil, db: String? = nil, port: UInt32 = 0, socket: String? = nil, flag: UInt = 0) throws -> Bool {
+        public func connect(host: String? = nil, user: String? = nil, password: String? = nil, db: String? = nil, port: UInt32 = 0, socket: String? = nil, flag: UInt = 0) throws {
             
             let hostOrBlank = convertString(host)
             let userOrBlank = convertString(user)
