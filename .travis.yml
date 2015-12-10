@@ -1,6 +1,8 @@
 language: generic
 sudo: required
 dist: trusty
+services:
+  - mysql
 env:
 - SWIFT_VERSION=swift-2.2-SNAPSHOT-2015-12-01-b
 install:
