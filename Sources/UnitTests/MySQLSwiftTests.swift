@@ -35,6 +35,8 @@ class MySQLTests: XCTestCase {
         
         let databaseName = "TestDatabase\(secondsSinceReferenceDate)"
         
+        print("Creating test database: " + databaseName)
+        
         // create DB
         do {
             
@@ -45,6 +47,24 @@ class MySQLTests: XCTestCase {
             try connection.query("CREATE TABLE family (Name char(20),Room char(8),Phone char(24))")
             
             try connection.query("INSERT INTO family VALUES ('Gomez Adams', 'master', '1-555-1212')")
+            
+            guard let result = try connection.query("SELECT * FROM family") where result.rowCount == 1
+                else { XCTFail("No results returned"); return }
+            
+            var stringResults = [[String]]()
+            
+            for (_, row) in EnumerateGenerator(result.rows) {
+                
+                let stringValues = row.values.map { (data) in String(UTF8Data: data)! }
+                
+                stringResults.append(stringValues)
+            }
+            
+            // print
+            print("Results: ")
+            for (index, row) in stringResults.enumerate() { print("\(index) = \(row)") }
+            
+            XCTAssert(stringResults == [["Gomez Adams", "master", "1-555-1212"]], "Results must match inserted data")
         }
         
         catch { XCTFail("Error: \(error))") }
