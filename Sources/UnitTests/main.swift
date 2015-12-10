@@ -8,7 +8,8 @@
 
 import SwiftFoundation
 import XCTest
-
+    
 #if os(Linux)
-XCTMain([MySQLTests()])
+    import Glibc
+    XCTMain([MySQLTests()])
 #endif
