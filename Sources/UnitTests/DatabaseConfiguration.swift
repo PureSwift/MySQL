@@ -10,4 +10,6 @@ import Foundation
 
 let hostname = "localhost"
 
+let password = ""
+
 let user = "root"
