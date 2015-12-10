@@ -27,7 +27,7 @@ public extension MySQL {
         
         // MARK: - Private Properties
         
-        private let internalPointer = UnsafeMutablePointer<MYSQL>()
+        private let internalPointer: UnsafeMutablePointer<MYSQL>
         
         // MARK: - Initialization
         
@@ -37,14 +37,22 @@ public extension MySQL {
         }
         
         /// Attempts to establish a connection to a MySQL database engine.
-        public init(host: String? = nil, user: String? = nil, password: String? = nil, db: String? = nil, port: UInt32 = 0, socket: String? = nil, flag: UInt = 0) throws {
+        public init() {
             
-            guard mysql_init(internalPointer) != nil else { fatalError("Could not initialize MySQL handler") }
+            self.internalPointer = mysql_init(nil)
+            
+            guard internalPointer != nil else { fatalError("Could not initialize MySQL handler") }
+        }
+                
+        // MARK: - Methods
+        
+        /// Attempts to establish a connection to a MySQL database engine.
+        public func connect(host: String? = nil, user: String? = nil, password: String? = nil, databaseName: String? = nil, port: UInt32 = 0, socket: String? = nil, flags: UInt = 0) throws {
             
             let hostOrBlank = convertString(host)
             let userOrBlank = convertString(user)
             let passwordOrBlank = convertString(password)
-            let dbOrBlank = convertString(db)
+            let dbOrBlank = convertString(databaseName)
             let socketOrBlank = convertString(socket)
             
             defer {
@@ -55,10 +63,8 @@ public extension MySQL {
                 cleanConvertedString(socketOrBlank)
             }
             
-            guard mysql_real_connect(internalPointer, hostOrBlank.0, userOrBlank.0, passwordOrBlank.0, dbOrBlank.0, port, socketOrBlank.0, flag) != nil else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+            guard mysql_real_connect(internalPointer, hostOrBlank.0, userOrBlank.0, passwordOrBlank.0, dbOrBlank.0, port, socketOrBlank.0, flags) != nil else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
         }
-                
-        // MARK: - Methods
     
         // MARK: Database Operations
         

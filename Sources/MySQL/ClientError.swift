@@ -64,6 +64,65 @@ public extension MySQL {
         
         /// Lost connection to MySQL server during query
         case ServerLost
+        
+        /// Commands out of sync; you can't run this command now
+        case CommandsOutOfSync
+        
+        /// Named pipe: %s
+        case NamedPipeConnection
+        
+        /// Can't wait for named pipe to host: %s pipe: %s (%lu)
+        case NamedPipeWait
+        
+        /// Can't open named pipe to host: %s pipe: %s (%lu)
+        case NamedPipeOpen
+        
+        /// Can't set state of named pipe to host: %s pipe: %s (%lu)
+        case NamedPipeSetState
+        
+        /// Can't initialize character set %s (path: %s)
+        case CannotReadCharacterSet
+        
+        /// Got packet bigger than 'max_allowed_packet' bytes
+        case PacketTooLarge
+        
+        /// Embedded server
+        case EmbeddedConnection
+        
+        /// Error on SHOW SLAVE STATUS:
+        case ProbeSlaveStatus
+        
+        /// Error on SHOW SLAVE HOSTS:
+        case ProbeSlaveHosts
+        
+        /// Error connecting to slave:
+        case ProbeSlaveConnect
+        
+        /// Error connecting to master:
+        case ProbeMasterConnect
+        
+        /// SSL connection error: %s
+        case SSLConnection
+        
+        /// Malformed packet
+        case MalformedPacket
+        
+        /// This client library is licensed only for use with MySQL servers having '%s' license
+        case WrongLicense
+        
+        /// Invalid use of null pointer
+        case NullPointer
+        
+        /// Statement not prepared
+        case StatementNotPrepared
+        
+        /// No data supplied for parameters in prepared statement
+        case DataTruncated
+        
+        /// CR_NO_PARAMETERS_EXISTS
+        case NoParameters
+        
+        
     }
 }
 

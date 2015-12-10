@@ -8,6 +8,8 @@
 
 import XCTest
 import MySQL
+import Cmysqlclient
+import SwiftFoundation
 
 class MySQLTests: XCTestCase {
     
@@ -23,13 +25,28 @@ class MySQLTests: XCTestCase {
     
     func testNewDB() {
         
-        let connection: MySQL.Connection
+        let connection = MySQL.Connection()
         
-        do { try connection = MySQL.Connection(host: hostname, user: user, password: password, db: nil, port: port) }
+        do { try connection.connect(hostname, user: user, password: password, databaseName: nil, port: port, socket: socket) }
             
         catch { XCTFail("Could not connect: \(error)"); return }
         
+        let databaseName = "TestDatabase\(Date())"
         
+        // create DB
+        
+        do {
+            
+            try connection.createDatabase(databaseName)
+            
+            try connection.selectDatabase(databaseName)
+            
+            try connection.query("CREATE TABLE family (Name char(20),Room char(8),Phone char(24))")
+            
+            try connection.query("INSERT INTO family VALUES ('Gomez Adams', 'master', '1-555-1212')")
+        }
+        
+        catch { XCTFail("Error: \(error) (\(connection.lastErrorString))") }
     }
     
 }

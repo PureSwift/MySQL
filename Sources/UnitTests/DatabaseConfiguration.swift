@@ -15,3 +15,5 @@ let user = "root"
 let password = "root"
 
 let port: UInt32 = 8889
+
+let socket = "/Applications/MAMP/tmp/mysql/mysql.sock"

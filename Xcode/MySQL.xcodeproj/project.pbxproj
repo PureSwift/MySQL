@@ -22,8 +22,8 @@
 		6EF32EA71C19088D00E5F6A0 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E9B1C19088D00E5F6A0 /* Row.swift */; };
 		6EF32EA91C19089300E5F6A0 /* MySQLSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E9D1C19088D00E5F6A0 /* MySQLSwiftTests.swift */; };
 		6EF32EAE1C1909ED00E5F6A0 /* SwiftFoundation.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF32EAC1C1909CF00E5F6A0 /* SwiftFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		6EF32EB01C1911DC00E5F6A0 /* libmysqld.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF32EAF1C1911DC00E5F6A0 /* libmysqld.a */; };
 		6EF32EB21C19171C00E5F6A0 /* DatabaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32EB11C19171C00E5F6A0 /* DatabaseConfiguration.swift */; };
+		6EF32EB41C191BF400E5F6A0 /* libmysqlclient.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3807191BCA208C003F8492 /* libmysqlclient.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,7 +142,6 @@
 		6EF32E9D1C19088D00E5F6A0 /* MySQLSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySQLSwiftTests.swift; sourceTree = "<group>"; };
 		6EF32EAA1C19099A00E5F6A0 /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = SOURCE_ROOT; };
 		6EF32EAC1C1909CF00E5F6A0 /* SwiftFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftFoundation.framework; path = ../Carthage/Build/Mac/SwiftFoundation.framework; sourceTree = "<group>"; };
-		6EF32EAF1C1911DC00E5F6A0 /* libmysqld.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmysqld.a; path = ../../../../../../usr/local/lib/libmysqld.a; sourceTree = "<group>"; };
 		6EF32EB11C19171C00E5F6A0 /* DatabaseConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,8 +158,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EF32EB41C191BF400E5F6A0 /* libmysqlclient.dylib in Frameworks */,
 				1A3807061BCA2006003F8492 /* MySQL.framework in Frameworks */,
-				6EF32EB01C1911DC00E5F6A0 /* libmysqld.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,7 +200,6 @@
 		1A3807091BCA2006003F8492 /* MySQLSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
-				6EF32EAF1C1911DC00E5F6A0 /* libmysqld.a */,
 				1A38070C1BCA2006003F8492 /* Info.plist */,
 			);
 			path = MySQLSwiftTests;
@@ -529,7 +527,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/$(PROJECT_NAME)";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -572,7 +569,6 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/$(PROJECT_NAME)";
 				LIBRARY_SEARCH_PATHS = /usr/local/lib;
-				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
