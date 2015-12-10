@@ -15,5 +15,9 @@ public extension MySQL {
         
         /// Could not fetch the entire result. 
         case NotEndOfFile
+        
+        /// MySQL Server or Client error code and description
+        case ErrorCode(UInt32, String)
     }
 }
+

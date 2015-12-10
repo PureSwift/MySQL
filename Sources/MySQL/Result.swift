@@ -29,11 +29,9 @@ public extension MySQL {
             
             let fieldLengths = mysql_fetch_lengths(self.internalPointer)
             
-            let lastFieldIndex = self.fieldCount - 1
-            
             var lengths = [UInt]()
             
-            for i in 0...lastFieldIndex {
+            for i in 0..<self.fieldCount {
                 
                 let fieldLength = fieldLengths[i]
                 

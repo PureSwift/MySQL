@@ -19,12 +19,6 @@ public extension MySQL {
             return String.fromCString(mysql_get_host_info(internalPointer))
         }
         
-        /// Human readable error string for the last error produced (if any).
-        public var lastErrorString: String?  {
-            
-            return String.fromCString(mysql_error(internalPointer))
-        }
-        
         // MARK: - Private Properties
         
         private let internalPointer: UnsafeMutablePointer<MYSQL>
@@ -63,7 +57,7 @@ public extension MySQL {
                 cleanConvertedString(socketOrBlank)
             }
             
-            guard mysql_real_connect(internalPointer, hostOrBlank.0, userOrBlank.0, passwordOrBlank.0, dbOrBlank.0, port, socketOrBlank.0, flags) != nil else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+            guard mysql_real_connect(internalPointer, hostOrBlank.0, userOrBlank.0, passwordOrBlank.0, dbOrBlank.0, port, socketOrBlank.0, flags) != nil else { throw statusCodeError }
         }
     
         // MARK: Database Operations
@@ -71,7 +65,7 @@ public extension MySQL {
         public func selectDatabase(database: String) throws {
             
             guard mysql_select_db(internalPointer, database) == 0
-                else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+                else { throw statusCodeError }
         }
         
         public func createDatabase(databaseName: String) throws {
@@ -94,7 +88,7 @@ public extension MySQL {
             
             let resultPointer = (wild == nil ? mysql_list_tables(internalPointer, nil) : mysql_list_tables(internalPointer, wild!))
             
-            guard resultPointer != nil else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+            guard resultPointer != nil else { throw statusCodeError }
             
             defer { mysql_free_result(resultPointer) }
             
@@ -119,7 +113,7 @@ public extension MySQL {
             
             let resultPointer = (wild == nil ? mysql_list_dbs(internalPointer, nil) : mysql_list_dbs(internalPointer, wild!))
             
-            guard resultPointer != nil else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+            guard resultPointer != nil else { throw statusCodeError }
             
             defer { mysql_free_result(resultPointer) }
             
@@ -147,7 +141,7 @@ public extension MySQL {
             defer { cleanConvertedString(convertedQueryString) }
             
             guard mysql_real_query(internalPointer, query, UInt(convertedQueryString.1)) == 0
-                else { throw ClientError(rawValue: mysql_errno(internalPointer))! }
+                else { throw statusCodeError }
             
             // get result...
             let mysqlResult = mysql_store_result(internalPointer)
@@ -164,6 +158,17 @@ public extension MySQL {
             }
             
             return Result(internalPointer: mysqlResult)
+        }
+        
+        // MARK: - Private Methods
+        
+        public var statusCodeError: MySQL.Error {
+            
+            let errorNumber = mysql_errno(internalPointer)
+            
+            let errorString = String.fromCString(mysql_error(internalPointer))!
+            
+            return MySQL.Error.ErrorCode(errorNumber, errorString)
         }
     }
 }

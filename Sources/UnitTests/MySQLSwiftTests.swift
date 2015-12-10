@@ -31,10 +31,11 @@ class MySQLTests: XCTestCase {
             
         catch { XCTFail("Could not connect: \(error)"); return }
         
-        let databaseName = "TestDatabase\(Date())"
+        let secondsSinceReferenceDate = Int(Date().timeIntervalSinceReferenceDate)
+        
+        let databaseName = "TestDatabase\(secondsSinceReferenceDate)"
         
         // create DB
-        
         do {
             
             try connection.createDatabase(databaseName)
@@ -46,7 +47,7 @@ class MySQLTests: XCTestCase {
             try connection.query("INSERT INTO family VALUES ('Gomez Adams', 'master', '1-555-1212')")
         }
         
-        catch { XCTFail("Error: \(error) (\(connection.lastErrorString))") }
+        catch { XCTFail("Error: \(error))") }
     }
     
 }
