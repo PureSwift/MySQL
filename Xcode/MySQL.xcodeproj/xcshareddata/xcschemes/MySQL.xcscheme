@@ -33,7 +33,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1A3807041BCA2006003F8492"
-               BuildableName = "MySQL.xctest"
+               BuildableName = "MySQLTests.xctest"
                BlueprintName = "MySQLTests"
                ReferencedContainer = "container:MySQL.xcodeproj">
             </BuildableReference>
