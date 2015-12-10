@@ -1,4 +1,5 @@
-
+.build
+Packages
 Carthage/*
 
 Xcode/MySQL.xcodeproj/project.xcworkspace/xcuserdata
