@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-import mysqlclient
+import Cmysqlclient
 
 public extension MySQL {
     
@@ -119,7 +119,7 @@ public extension MySQL.Result {
             
             catch { return nil } // EOF error
             
-            return nextRow // no more rows
+            return nextRow // next row, or none 
         }
     }
 }

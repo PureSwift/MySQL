@@ -7,7 +7,7 @@
 //
 
 //import SwiftFoundation
-import mysqlclient
+import Cmysqlclient
 
 public enum ClientOption/*: OptionsBitmask*/ {
     

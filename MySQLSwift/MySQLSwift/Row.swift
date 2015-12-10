@@ -6,7 +6,8 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-import mysqlclient
+import Cmysqlclient
+import SwiftFoundation
 
 public extension MySQL {
     
