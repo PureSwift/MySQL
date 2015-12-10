@@ -37,7 +37,7 @@ class MySQLTests: XCTestCase {
         
         print("Creating test database: " + databaseName)
         
-        // create DB
+        // create DB, insert data, and then fetch
         do {
             
             try connection.createDatabase(databaseName)
