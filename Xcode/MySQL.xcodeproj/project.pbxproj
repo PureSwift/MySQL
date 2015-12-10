@@ -22,6 +22,8 @@
 		6EF32EA71C19088D00E5F6A0 /* Row.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E9B1C19088D00E5F6A0 /* Row.swift */; };
 		6EF32EA91C19089300E5F6A0 /* MySQLSwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E9D1C19088D00E5F6A0 /* MySQLSwiftTests.swift */; };
 		6EF32EAE1C1909ED00E5F6A0 /* SwiftFoundation.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF32EAC1C1909CF00E5F6A0 /* SwiftFoundation.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		6EF32EB01C1911DC00E5F6A0 /* libmysqld.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EF32EAF1C1911DC00E5F6A0 /* libmysqld.a */; };
+		6EF32EB21C19171C00E5F6A0 /* DatabaseConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32EB11C19171C00E5F6A0 /* DatabaseConfiguration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +54,7 @@
 		1A3806FB1BCA2006003F8492 /* MySQL.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MySQL.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A3806FE1BCA2006003F8492 /* MySQLSwift.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MySQLSwift.h; sourceTree = "<group>"; };
 		1A3807001BCA2006003F8492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		1A3807051BCA2006003F8492 /* MySQL.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MySQL.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A3807051BCA2006003F8492 /* MySQLTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MySQLTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A38070C1BCA2006003F8492 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A3807191BCA208C003F8492 /* libmysqlclient.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libmysqlclient.dylib; path = /usr/local/lib/libmysqlclient.dylib; sourceTree = "<absolute>"; };
 		1A3807211BCA24F7003F8492 /* big_endian.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = big_endian.h; sourceTree = "<group>"; };
@@ -140,6 +142,8 @@
 		6EF32E9D1C19088D00E5F6A0 /* MySQLSwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySQLSwiftTests.swift; sourceTree = "<group>"; };
 		6EF32EAA1C19099A00E5F6A0 /* module.map */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.map; sourceTree = SOURCE_ROOT; };
 		6EF32EAC1C1909CF00E5F6A0 /* SwiftFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftFoundation.framework; path = ../Carthage/Build/Mac/SwiftFoundation.framework; sourceTree = "<group>"; };
+		6EF32EAF1C1911DC00E5F6A0 /* libmysqld.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libmysqld.a; path = ../../../../../../usr/local/lib/libmysqld.a; sourceTree = "<group>"; };
+		6EF32EB11C19171C00E5F6A0 /* DatabaseConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A3807061BCA2006003F8492 /* MySQL.framework in Frameworks */,
+				6EF32EB01C1911DC00E5F6A0 /* libmysqld.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				1A3806FB1BCA2006003F8492 /* MySQL.framework */,
-				1A3807051BCA2006003F8492 /* MySQL.xctest */,
+				1A3807051BCA2006003F8492 /* MySQLTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -196,6 +201,7 @@
 		1A3807091BCA2006003F8492 /* MySQLSwiftTests */ = {
 			isa = PBXGroup;
 			children = (
+				6EF32EAF1C1911DC00E5F6A0 /* libmysqld.a */,
 				1A38070C1BCA2006003F8492 /* Info.plist */,
 			);
 			path = MySQLSwiftTests;
@@ -327,6 +333,7 @@
 		6EF32E9C1C19088D00E5F6A0 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				6EF32EB11C19171C00E5F6A0 /* DatabaseConfiguration.swift */,
 				6EF32E9D1C19088D00E5F6A0 /* MySQLSwiftTests.swift */,
 			);
 			path = UnitTests;
@@ -389,7 +396,7 @@
 			);
 			name = MySQLTests;
 			productName = MySQLSwiftTests;
-			productReference = 1A3807051BCA2006003F8492 /* MySQL.xctest */;
+			productReference = 1A3807051BCA2006003F8492 /* MySQLTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -468,6 +475,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EF32EA91C19089300E5F6A0 /* MySQLSwiftTests.swift in Sources */,
+				6EF32EB21C19171C00E5F6A0 /* DatabaseConfiguration.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -621,7 +629,7 @@
 				INFOPLIST_FILE = MySQLSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colemancda.MySQLSwiftTests;
-				PRODUCT_NAME = MySQL;
+				PRODUCT_NAME = MySQLTests;
 			};
 			name = Debug;
 		};
@@ -632,7 +640,7 @@
 				INFOPLIST_FILE = MySQLSwiftTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.colemancda.MySQLSwiftTests;
-				PRODUCT_NAME = MySQL;
+				PRODUCT_NAME = MySQLTests;
 			};
 			name = Release;
 		};

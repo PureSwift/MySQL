@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import MySQL
+import MySQL
 
 class MySQLTests: XCTestCase {
     
@@ -21,16 +21,15 @@ class MySQLTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measureBlock {
-            // Put the code you want to measure the time of here.
-        }
+    func testNewDB() {
+        
+        let connection: MySQL.Connection
+        
+        do { try connection = MySQL.Connection(host: hostname, user: user, password: password, db: nil, port: port) }
+            
+        catch { XCTFail("Could not connect: \(error)"); return }
+        
+        
     }
     
 }
