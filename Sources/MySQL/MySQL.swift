@@ -6,7 +6,7 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
-import Cmysqlclient
+import CMySQL
 
 public final class MySQL {
     

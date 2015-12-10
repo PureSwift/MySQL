@@ -8,7 +8,6 @@
 
 import XCTest
 import MySQL
-import Cmysqlclient
 import SwiftFoundation
 
 class MySQLTests: XCTestCase {
