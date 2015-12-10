@@ -10,7 +10,6 @@
 		1A3806FF1BCA2006003F8492 /* MySQLSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A3806FE1BCA2006003F8492 /* MySQLSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A3807061BCA2006003F8492 /* MySQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3806FB1BCA2006003F8492 /* MySQL.framework */; };
 		1A38071A1BCA208C003F8492 /* libmysqlclient.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3807191BCA208C003F8492 /* libmysqlclient.dylib */; };
-		6E0324991C1951DF000F000B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E0324971C195171000F000B /* main.swift */; };
 		6EF32E9F1C19088D00E5F6A0 /* ClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E931C19088D00E5F6A0 /* ClientOption.swift */; };
 		6EF32EA01C19088D00E5F6A0 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E941C19088D00E5F6A0 /* Connection.swift */; };
 		6EF32EA11C19088D00E5F6A0 /* ConvertString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E951C19088D00E5F6A0 /* ConvertString.swift */; };
@@ -475,7 +474,6 @@
 			files = (
 				6EF32EA91C19089300E5F6A0 /* MySQLTests.swift in Sources */,
 				6EF32EB21C19171C00E5F6A0 /* DatabaseConfiguration.swift in Sources */,
-				6E0324991C1951DF000F000B /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
