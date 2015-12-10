@@ -59,7 +59,15 @@ class MySQLTests: XCTestCase {
             print("Results: ")
             for (index, row) in stringResults.enumerate() { print("\(index) = \(row)") }
             
-            XCTAssert(stringResults == [["Gomez Adams", "master", "1-555-1212"]], "Results must match inserted data")
+            #if os(OSX)
+                XCTAssert(stringResults == [["Gomez Adams", "master", "1-555-1212"]], "Results must match inserted data")
+            #else
+                XCTAssert(stringResults.count == 1)
+                XCTAssert(stringResults[0][0] == "Gomez Adams")
+                XCTAssert(stringResults[0][1] == "master")
+                XCTAssert(stringResults[0][2] == "1-555-1212")
+            #endif
+            
         }
         
         catch { XCTFail("Error: \(error))") }
