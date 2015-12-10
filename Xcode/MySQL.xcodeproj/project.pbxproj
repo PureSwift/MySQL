@@ -128,6 +128,7 @@
 		1A3807681BCA24F7003F8492 /* sslopt-longopts.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sslopt-longopts.h"; sourceTree = "<group>"; };
 		1A3807691BCA24F7003F8492 /* sslopt-vars.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "sslopt-vars.h"; sourceTree = "<group>"; };
 		1A38076A1BCA24F7003F8492 /* typelib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typelib.h; sourceTree = "<group>"; };
+		6E0324961C194D7E000F000B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		6EF32E931C19088D00E5F6A0 /* ClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientOption.swift; sourceTree = "<group>"; };
 		6EF32E941C19088D00E5F6A0 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		6EF32E951C19088D00E5F6A0 /* ConvertString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertString.swift; sourceTree = "<group>"; };
@@ -167,6 +168,7 @@
 		1A3806F11BCA2006003F8492 = {
 			isa = PBXGroup;
 			children = (
+				6E0324961C194D7E000F000B /* Package.swift */,
 				6EF32EAB1C1909B600E5F6A0 /* Dependencies */,
 				6EF32E901C19088D00E5F6A0 /* Sources */,
 				1A3806FD1BCA2006003F8492 /* MySQLSwift */,
