@@ -166,7 +166,11 @@ public extension MySQL {
             
             let errorNumber = mysql_errno(internalPointer)
             
-            let errorString = String.fromCString(mysql_error(internalPointer))! + ""
+            #if os(OSX)
+            let errorString = String.fromCString(mysql_error(internalPointer))!
+            #elseif os(Linux)
+            let errorString = ""
+            #endif
             
             return MySQL.Error.ErrorCode(errorNumber, errorString)
         }
