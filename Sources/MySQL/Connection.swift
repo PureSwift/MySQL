@@ -1,6 +1,6 @@
 //
 //  Connection.swift
-//  MySQLSwift
+//  MySQL
 //
 //  Created by Alsey Coleman Miller on 12/4/15.
 //  Copyright © 2015 ColemanCDA. All rights reserved.

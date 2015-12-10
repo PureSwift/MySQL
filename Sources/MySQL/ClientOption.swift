@@ -1,6 +1,6 @@
 //
 //  ClientOption.swift
-//  MySQLSwift
+//  MySQL
 //
 //  Created by Alsey Coleman Miller on 10/11/15.
 //  Copyright © 2015 ColemanCDA. All rights reserved.

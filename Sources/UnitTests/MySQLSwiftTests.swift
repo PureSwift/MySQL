@@ -1,15 +1,15 @@
 //
-//  MySQLSwiftTests.swift
-//  MySQLSwiftTests
+//  MySQLTests.swift
+//  MySQLTests
 //
 //  Created by Alsey Coleman Miller on 10/10/15.
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
 import XCTest
-@testable import MySQLSwift
+@testable import MySQL
 
-class MySQLSwiftTests: XCTestCase {
+class MySQLTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

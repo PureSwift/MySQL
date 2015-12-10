@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1A3806FA1BCA2006003F8492"
-               BuildableName = "MySQLSwift.framework"
-               BlueprintName = "MySQLSwift"
-               ReferencedContainer = "container:MySQLSwift.xcodeproj">
+               BuildableName = "MySQL.framework"
+               BlueprintName = "MySQL"
+               ReferencedContainer = "container:MySQL.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "1A3807041BCA2006003F8492"
-               BuildableName = "MySQLSwiftTests.xctest"
-               BlueprintName = "MySQLSwiftTests"
-               ReferencedContainer = "container:MySQLSwift.xcodeproj">
+               BuildableName = "MySQL.xctest"
+               BlueprintName = "MySQLTests"
+               ReferencedContainer = "container:MySQL.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1A3806FA1BCA2006003F8492"
-            BuildableName = "MySQLSwift.framework"
-            BlueprintName = "MySQLSwift"
-            ReferencedContainer = "container:MySQLSwift.xcodeproj">
+            BuildableName = "MySQL.framework"
+            BlueprintName = "MySQL"
+            ReferencedContainer = "container:MySQL.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,9 +65,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1A3806FA1BCA2006003F8492"
-            BuildableName = "MySQLSwift.framework"
-            BlueprintName = "MySQLSwift"
-            ReferencedContainer = "container:MySQLSwift.xcodeproj">
+            BuildableName = "MySQL.framework"
+            BlueprintName = "MySQL"
+            ReferencedContainer = "container:MySQL.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,9 +83,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "1A3806FA1BCA2006003F8492"
-            BuildableName = "MySQLSwift.framework"
-            BlueprintName = "MySQLSwift"
-            ReferencedContainer = "container:MySQLSwift.xcodeproj">
+            BuildableName = "MySQL.framework"
+            BlueprintName = "MySQL"
+            ReferencedContainer = "container:MySQL.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
