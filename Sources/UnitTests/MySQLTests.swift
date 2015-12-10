@@ -22,7 +22,7 @@ class MySQLTests: XCTestCase {
         
         let connection = MySQL.Connection()
         
-        do { try connection.connect(hostname, user: user, password: password) }
+        do { try connection.connect(user: user, password: password, socket: "/var/run/mysqld/mysqld.sock") }
             
         catch { XCTFail("Could not connect: \(error)"); return }
         

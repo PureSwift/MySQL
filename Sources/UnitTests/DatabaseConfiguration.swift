@@ -10,6 +10,6 @@ import Foundation
 
 let hostname = "localhost"
 
-let password = ""
+let password: String? = nil
 
-let user = "root"
+let user = "travis"
