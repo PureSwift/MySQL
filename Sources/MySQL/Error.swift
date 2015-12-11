@@ -6,6 +6,8 @@
 //  Copyright © 2015 ColemanCDA. All rights reserved.
 //
 
+import CMySQL
+
 public extension MySQL {
     
     public enum Error: ErrorType {
@@ -21,3 +23,20 @@ public extension MySQL {
     }
 }
 
+// MARK: - Extensions
+
+internal extension MySQL.Connection {
+    
+    internal var statusCodeError: MySQL.Error {
+        
+        let errorNumber = mysql_errno(internalPointer)
+        
+        #if os(OSX)
+            let errorString = String.fromCString(mysql_error(internalPointer))!
+        #elseif os(Linux)
+            let errorString = ""
+        #endif
+        
+        return MySQL.Error.ErrorCode(errorNumber, errorString)
+    }
+}

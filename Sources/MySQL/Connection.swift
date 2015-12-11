@@ -19,23 +19,20 @@ public extension MySQL {
             return String.fromCString(mysql_get_host_info(internalPointer))
         }
         
-        // MARK: - Private Properties
+        // MARK: - Internal Properties
         
-        private let internalPointer: UnsafeMutablePointer<MYSQL>
+        internal let internalPointer: UnsafeMutablePointer<MYSQL>
         
         // MARK: - Initialization
         
-        deinit {
-            
-            mysql_close(internalPointer)
-        }
+        deinit { mysql_close(internalPointer) }
         
         /// Attempts to establish a connection to a MySQL database engine.
-        public init() {
+        public init() throws {
             
             self.internalPointer = mysql_init(nil)
             
-            guard internalPointer != nil else { fatalError("Could not initialize MySQL handler") }
+            guard internalPointer != nil else { throw statusCodeError }
         }
                 
         // MARK: - Methods
@@ -158,21 +155,6 @@ public extension MySQL {
             }
             
             return Result(internalPointer: mysqlResult)
-        }
-        
-        // MARK: - Private Methods
-        
-        public var statusCodeError: MySQL.Error {
-            
-            let errorNumber = mysql_errno(internalPointer)
-            
-            #if os(OSX)
-            let errorString = String.fromCString(mysql_error(internalPointer))!
-            #elseif os(Linux)
-            let errorString = ""
-            #endif
-            
-            return MySQL.Error.ErrorCode(errorNumber, errorString)
         }
     }
 }

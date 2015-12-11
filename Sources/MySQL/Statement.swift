@@ -13,6 +13,10 @@ public extension MySQL {
     
     public final class Statement {
         
+        // MARK: - Properties
+        
+        public let connection: Connection
+        
         // MARK: - Private Methods
         
         private let internalPointer: UnsafeMutablePointer<MYSQL_STMT>
@@ -21,12 +25,19 @@ public extension MySQL {
         
         deinit { mysql_stmt_close(internalPointer) }
         
-        public init() {
+        public init(connection: Connection) throws {
             
-            self.internalPointer = mysql_stmt_init(nil)
+            self.connection = connection
+            
+            self.internalPointer = mysql_stmt_init(connection.internalPointer)
+            
+            guard self.internalPointer != nil else { throw connection.statusCodeError }
+            
         }
         
-        // MARK: - Properties
+        // MARK: - Methods
+        
+        
     }
 }
 
