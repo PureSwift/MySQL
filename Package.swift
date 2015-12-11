@@ -5,6 +5,7 @@ let package = Package(
     dependencies: [
         .Package(url: "https://github.com/PureSwift/CMySQL.git", majorVersion: 1),
         .Package(url: "https://github.com/PureSwift/SwiftFoundation.git", majorVersion: 1),
+        .Package(url: "https://github.com/PureSwift/CoreModel.git", majorVersion: 1)
     ],
     targets: [
         Target(
