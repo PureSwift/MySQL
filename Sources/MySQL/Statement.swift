@@ -17,9 +17,9 @@ public extension MySQL {
         
         public let connection: Connection
         
-        // MARK: - Private Methods
+        // MARK: - Internal Methods
         
-        private let internalPointer: UnsafeMutablePointer<MYSQL_STMT>
+        internal let internalPointer: UnsafeMutablePointer<MYSQL_STMT>
         
         // MARK: - Initialization
         
@@ -39,8 +39,11 @@ public extension MySQL {
         
         public func prepare(statement: String) throws {
             
-            
+            guard mysql_stmt_prepare(internalPointer, statement, UInt(statement.utf8.count)) == 0
+                else { throw MySQL.Error.ErrorCode(<#T##UInt32#>, <#T##String#>) }
         }
+            
+        
     }
 }
 
