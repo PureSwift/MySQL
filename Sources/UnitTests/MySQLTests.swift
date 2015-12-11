@@ -20,12 +20,6 @@ class MySQLTests: XCTestCase {
     
     func testNewDB() {
         
-        let connection = MySQL.Connection()
-        
-        do { try connection.connect(hostname, user: user) }
-            
-        catch { XCTFail("Could not connect: \(error)"); return }
-        
         let secondsSinceReferenceDate = Int(Date().timeIntervalSinceReferenceDate)
         
         let databaseName = "TestDatabase\(secondsSinceReferenceDate)"
@@ -34,6 +28,10 @@ class MySQLTests: XCTestCase {
         
         // create DB, insert data, and then fetch
         do {
+            
+            let connection = try MySQL.Connection()
+            
+            try connection.connect(hostname, user: user)
             
             try connection.createDatabase(databaseName)
             

@@ -37,7 +37,10 @@ public extension MySQL {
         
         // MARK: - Methods
         
-        
+        public func prepare(statement: String) throws {
+            
+            
+        }
     }
 }
 
