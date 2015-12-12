@@ -19,6 +19,11 @@ public extension MySQL {
             return String.fromCString(mysql_get_host_info(internalPointer))
         }
         
+        public var serverVersion: UInt {
+            
+            return mysql_get_server_version(internalPointer)
+        }
+        
         // MARK: - Private Properties
         
         private let internalPointer: UnsafeMutablePointer<MYSQL>
