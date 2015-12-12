@@ -21,6 +21,10 @@ public final class MySQLStatement {
     
     public let connection: MySQL.Connection
     
+    public internal(set) var parameterBindings = [ParameterBinding]()
+    
+    public internal(set) var resultBindings = [ResultBinding]()
+    
     // MARK: - Internal Methods
     
     internal let internalPointer: UnsafeMutablePointer<MYSQL_STMT>
@@ -46,9 +50,10 @@ public final class MySQLStatement {
             else { throw statusCodeError }
     }
     
-    public func bindResult() {
+    public func execute() throws {
         
-        
+        guard mysql_stmt_execute(internalPointer) == 0
+            else { throw statusCodeError }
     }
     
     // MARK: - Private Methods
