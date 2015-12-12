@@ -11,39 +11,64 @@ import CMySQL
 
 public extension MySQL {
     
-    public final class Statement {
+    // Due to compiler error
+    public typealias Statement = MySQLStatement
+}
+
+public final class MySQLStatement {
+    
+    // MARK: - Properties
+    
+    public let connection: MySQL.Connection
+    
+    // MARK: - Internal Methods
+    
+    internal let internalPointer: UnsafeMutablePointer<MYSQL_STMT>
+    
+    // MARK: - Initialization
+    
+    deinit { mysql_stmt_close(internalPointer) }
+    
+    public init(connection: MySQL.Connection) throws {
         
-        // MARK: - Properties
+        self.connection = connection
         
-        public let connection: Connection
+        self.internalPointer = mysql_stmt_init(connection.internalPointer)
         
-        // MARK: - Internal Methods
+        guard self.internalPointer != nil else { throw connection.statusCodeError }
+    }
+    
+    // MARK: - Methods
+    
+    public func prepare(statement: String) throws {
         
-        internal let internalPointer: UnsafeMutablePointer<MYSQL_STMT>
+        guard mysql_stmt_prepare(internalPointer, statement, UInt(statement.utf8.count)) == 0
+            else { throw statusCodeError }
+    }
+    
+    public func bindParameter() {
         
-        // MARK: - Initialization
         
-        deinit { mysql_stmt_close(internalPointer) }
+    }
+    
+    public func bindResult() {
         
-        public init(connection: Connection) throws {
-            
-            self.connection = connection
-            
-            self.internalPointer = mysql_stmt_init(connection.internalPointer)
-            
-            guard self.internalPointer != nil else { throw connection.statusCodeError }
-            
-        }
         
-        // MARK: - Methods
+    }
+    
+    // MARK: - Private Methods
+    
+    internal var statusCodeError: MySQL.Error {
         
-        public func prepare(statement: String) throws {
-            
-            guard mysql_stmt_prepare(internalPointer, statement, UInt(statement.utf8.count)) == 0
-                else { throw MySQL.Error.ErrorCode(<#T##UInt32#>, <#T##String#>) }
-        }
-            
+        let errorNumber = mysql_stmt_errno(internalPointer)
         
+        #if os(OSX)
+            let errorString = String.fromCString(mysql_stmt_error(internalPointer))!
+        #elseif os(Linux)
+            let errorString = ""
+        #endif
+        
+        return MySQL.Error.ErrorCode(errorNumber, errorString)
     }
 }
 

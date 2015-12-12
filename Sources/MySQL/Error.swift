@@ -23,36 +23,4 @@ public extension MySQL {
     }
 }
 
-// MARK: - Extensions
 
-internal extension MySQL.Connection {
-    
-    internal var statusCodeError: MySQL.Error {
-        
-        let errorNumber = mysql_errno(internalPointer)
-        
-        #if os(OSX)
-            let errorString = String.fromCString(mysql_error(internalPointer))!
-        #elseif os(Linux)
-            let errorString = ""
-        #endif
-        
-        return MySQL.Error.ErrorCode(errorNumber, errorString)
-    }
-}
-
-internal extension MySQL.Statement {
-    
-    internal var statusCodeError: MySQL.Error {
-        
-        let errorNumber = mysql_errno(internalPointer)
-        
-        #if os(OSX)
-            let errorString = String.fromCString(mysql_error(internalPointer))!
-        #elseif os(Linux)
-            let errorString = ""
-        #endif
-        
-        return MySQL.Error.ErrorCode(errorNumber, errorString)
-    }
-}
