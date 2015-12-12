@@ -14,6 +14,9 @@ public extension MySQL {
     /// **CoreModel** ```Store``` interface for **MySQL**.
     public final class Store: CoreModel.Store {
         
+        /// Name of the column reserved for resource IDs.
+        public static let resourceIDColumnName = "_id"
+        
         // MARK: - Properties
         
         /// The model the persistent store will handle.
@@ -30,6 +33,22 @@ public extension MySQL {
         }
         
         // MARK: - Methods
+        
+        /// Convenience method for creating tables.
+        public func setupSchema(maxString: Int = 255) throws {
+            
+            for (entityName, entity) in self.model {
+                
+                var statement = "CREATE TABLE " + entityName
+                
+                statement += "\n(\n"
+                
+                // set primary key
+                statement += Store.resourceIDColumnName + " " +
+                
+                for
+            }
+        }
         
         // MARK: Store Methods
         
