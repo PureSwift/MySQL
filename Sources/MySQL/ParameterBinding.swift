@@ -25,46 +25,6 @@ public extension MySQLStatement {
     }
 }
 
-public extension MySQLStatement {
-    
-    /// Binds parameters to the statement. 
-    public func bind(parameters: [ParameterBinding]) throws {
-        
-        let bindingsPointer = UnsafeMutablePointer<MYSQL_BIND>.alloc(parameters.count)
-        
-        // To use a MYSQL_BIND structure, zero its contents to initialize it, then set its members appropriately.
-        memset(bindingsPointer, 0, parameters.count)
-        
-        for (index, binding) in parameters.enumerate() {
-            
-            let internalBinding = binding.internalBinding
-            
-            bindingsPointer[index].buffer_type = internalBinding.dynamicType.fieldType
-            
-            bindingsPointer[index].buffer = internalBinding.buffer
-            
-            bindingsPointer[index].buffer_length = internalBinding.bufferLength
-        }
-        
-        guard mysql_stmt_bind_param(internalPointer, bindingsPointer) == 0 else {
-            
-            bindingsPointer.dealloc(parameters.count)
-            
-            throw statusCodeError
-        }
-        
-        
-        
-        if let previousBindingsPointer = self.internalParametersPointer {
-            
-            let previousParameters
-        }
-        
-        self.internalParametersPointer = bindingsPointer
-        self.parameterBindings = parameters
-    }
-}
-
 // MARK: - Supporting Types
 
 internal protocol InternalParameterBinding: class {
@@ -81,6 +41,8 @@ extension InternalParameterBinding {
     var bufferLength: UInt { return 0 }
 }
 
+// MARK: Tiny
+
 public extension MySQLStatement {
     
     public final class TinyParameterBinding {
@@ -92,18 +54,18 @@ public extension MySQLStatement {
             set { internalPointer.memory = newValue }
         }
         
-        // MARK: - Internal Properties
+        // MARK: Internal Properties
         
         internal static let fieldType = MYSQL_TYPE_TINY
         
         internal let internalPointer: UnsafeMutablePointer<CShort>
         
-        internal var buffer: UnsafeMutablePointer<Void> {
+        internal lazy var buffer: UnsafeMutablePointer<Void> = {
             
-            return unsafeBitCast(internalPointer, UnsafeMutablePointer<Void>.self)
-        }
+            return UnsafeMutablePointer<Void>(self.internalPointer)
+        }()
         
-        // MARK: - Initialization
+        // MARK:Initialization
         
         deinit {
             
