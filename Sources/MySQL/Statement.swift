@@ -46,11 +46,6 @@ public final class MySQLStatement {
             else { throw statusCodeError }
     }
     
-    public func bindParameter() {
-        
-        
-    }
-    
     public func bindResult() {
         
         

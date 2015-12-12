@@ -11,161 +11,80 @@ import CMySQL
 
 public extension MySQLStatement {
     
-    public struct Parameter { }
-}
-
-public extension MySQLStatement.Parameter {
-    
-    public enum Value {
+    public final class ParameterBinding {
         
-        case Tiny
+        // MARK: - Properties
+        
+        public var value: Value
+        
+        // MARK: - Internal Properties
+        
+        internal let internalPointer = UnsafeMutablePointer<MYSQL_BIND>()
+        
+        internal let dataPointer: UnsafeMutablePointer<Void>
+        
+        // MARK: - Initialization
+        
+        deinit {
+            
+            internalPointer.destroy()
+            internalPointer.dealloc(1)
+            
+            dataPointer.destroy()
+            dataPointer.dealloc(1)
+        }
+        
+        public init(value: Value) {
+            
+            self.value = value
+            
+            // To use a MYSQL_BIND structure, zero its contents to initialize it.
+            memset(self.internalPointer, 0, sizeof(MYSQL_BIND))
+            
+            // initialize data pointer
+            self.dataPointer = UnsafeMutablePointer<BindingDataType.DataType>.alloc(1)
+            
+            self.dataPointer.memory = parameterData.value
+            
+            // set data type
+            self.internalPointer.memory.buffer_type = BindingDataType.fieldType
+            
+            // set data pointer
+            self.internalPointer.memory.buffer = unsafeBitCast(self.internalPointer, UnsafeMutablePointer<Void>.self)
+        }
     }
-}
-
-public final class MySQLParameterBinding {
-    
-    // MARK: - Properties
-    
-    public var parameterData: BindingDataType
-    
-    // MARK: - Internal Properties
-    
-    internal let internalPointer = UnsafeMutablePointer<MYSQL_BIND>()
-    
-    internal let dataPointer: UnsafeMutablePointer<BindingDataType.DataType>
-    
-    // MARK: - Initialization
-    
-    deinit {
-        
-        internalPointer.destroy()
-        internalPointer.dealloc(1)
-        
-        dataPointer.destroy()
-        dataPointer.dealloc(1)
-    }
-    
-    public init(parameterData: BindingDataType) {
-        
-        guard parameterData is InternalMySQLParameterBindingDataType
-            else { fatalError("Unsupported MySQLParameterBindingDataType") }
-        
-        self.parameterData = parameterData
-        
-        // To use a MYSQL_BIND structure, zero its contents to initialize it.
-        memset(self.internalPointer, 0, sizeof(MYSQL_BIND))
-        
-        // initialize data pointer
-        self.dataPointer = UnsafeMutablePointer<BindingDataType.DataType>.alloc(1)
-        
-        self.dataPointer.memory = parameterData.value
-        
-        // set data type
-        self.internalPointer.memory.buffer_type = BindingDataType.fieldType
-        
-        // set data pointer
-        self.internalPointer.memory.buffer = unsafeBitCast(self.internalPointer, UnsafeMutablePointer<Void>.self)
-        
-        
-    }
-    
-    // MARK: - Methods
-}
-
-// MARK: - Supporting Types
-
-// MARK: - Binding
-
-/// Swift / C data types that can be converted from MySQL values.
-///
-/// - Note: Never conform to this protocol! This is only for type safety.
-public protocol MySQLParameterBindingDataType {
-    
-    typealias DataType
-    
-    static var fieldType: enum_field_types { get }
-    
-    var value: DataType { get }
 }
 
 public extension MySQLStatement {
     
-    public struct Parameter {
+    public func bind(parameter: ParameterBinding) {
         
-        public struct TinyInteger: MySQLParameterBindingDataType {
-            
-            public static let fieldType = MYSQL_TYPE_TINY
-            
-            public let value: CChar
-            
-            public init(value: CChar) {
-                
-                self.value = value
-            }
-        }
         
-        public struct SmallInteger: MySQLParameterBindingDataType {
-            
-            public static let fieldType = MYSQL_TYPE_SHORT
-            
-            public let value: CShort
-            
-            public init(value: CShort) {
-                
-                self.value = value
-            }
-        }
-        
-        public struct Integer: MySQLParameterBindingDataType {
-            
-            public static let fieldType = MYSQL_TYPE_LONG
-            
-            public let value: CInt
-            
-            public init(value: CInt) {
-                
-                self.value = value
-            }
-        }
-        
-        public struct BigInteger: MySQLParameterBindingDataType {
-            
-            public static let fieldType = MYSQL_TYPE_LONGLONG
-            
-            public let value: CShort
-            
-            public init(value: CShort) {
-                
-                self.value = value
-            }
-        }
     }
 }
 
-// MARK: Internal Binding
+// MARK: - Supporting Types
 
-internal protocol InternalMySQLParameterBindingDataType: MySQLParameterBindingDataType {
+public extension MySQLStatement.ParameterBinding {
     
-    typealias InternalDataType
-    
-    var internalValue: InternalDataType { get }
+    public enum Value {
+        
+        case Null
+        case Tiny(CChar)
+        case Short(CShort)
+        case Long(CInt)
+        case LongLong(CLongLong)
+        case Float(CFloat)
+        case Double(CDouble)
+        case Time(MYSQL_TIME)
+        case Date(MYSQL_TIME)
+        case DateTime(MYSQL_TIME)
+        case DateStamp(MYSQL_TIME)
+        case TimeStamp(MYSQL_TIME)
+        case String(StringValue)
+        case Blob(Data)
+    }
 }
-
-extension MySQLStatement.Parameter.TinyInteger: InternalMySQLParameterBindingDataType {
-    
-    var internalValue: CChar { return self.value }
-}
-
-extension MySQLStatement.Parameter.SmallInteger: InternalMySQLParameterBindingDataType {
-    
-    var internalValue: CShort { return self.value }
-}
-
-extension MySQLStatement.Parameter.Integer: InternalMySQLParameterBindingDataType {
-    
-    var internalValue: CInt { return self.value }
-}
-
 
 
 

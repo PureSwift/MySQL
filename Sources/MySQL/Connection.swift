@@ -38,7 +38,7 @@ public extension MySQL {
         // MARK: - Methods
         
         /// Attempts to establish a connection to a MySQL database engine.
-        public func connect(host: String? = nil, user: String? = nil, password: String? = nil, databaseName: String? = nil, port: UInt32 = 0, socket: String? = nil, flags: UInt = 0) throws {
+        public func connect(host: String? = nil, user: String? = nil, password: String? = nil, databaseName: String? = nil, port: UInt32 = 0, socket: String? = nil) throws {
             
             let hostOrBlank = convertString(host)
             let userOrBlank = convertString(user)
@@ -54,7 +54,7 @@ public extension MySQL {
                 cleanConvertedString(socketOrBlank)
             }
             
-            guard mysql_real_connect(internalPointer, hostOrBlank.0, userOrBlank.0, passwordOrBlank.0, dbOrBlank.0, port, socketOrBlank.0, flags) != nil else { throw statusCodeError }
+            guard mysql_real_connect(internalPointer, hostOrBlank.0, userOrBlank.0, passwordOrBlank.0, dbOrBlank.0, port, socketOrBlank.0, 0) != nil else { throw statusCodeError }
         }
     
         // MARK: Database Operations
