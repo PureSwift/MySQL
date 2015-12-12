@@ -72,6 +72,11 @@ extension CChar: MySQLNativeDataType {
     public static let fieldType = MYSQL_TYPE_TINY
 }
 
+extension enum_field_types {
+    
+    
+}
+
 extension CShort: MySQLNativeDataType {
     
     public static let fieldType = MYSQL_TYPE_SHORT
