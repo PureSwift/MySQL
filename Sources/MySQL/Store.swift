@@ -41,7 +41,7 @@ public extension MySQL {
             
             let statement = "select"
             
-            fatalError()
+            fatalError("Not implemented")
         }
         
         /// Determines whether the specified resource exists.
