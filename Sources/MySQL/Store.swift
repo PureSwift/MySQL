@@ -39,14 +39,50 @@ public extension MySQL {
             
             for (entityName, entity) in self.model {
                 
-                var statement = "CREATE TABLE " + entityName
+                var statement = "CREATE TABLE " + entityName + "\n"
                 
-                statement += "\n(\n"
+                statement += "(" + "\n"
                 
                 // set primary key
-                statement += Store.resourceIDColumnName + " " +
+                statement += MySQL.Store.resourceIDColumnName + " " + "NOT NULL"
                 
-                for
+                // create attributes
+                for (attributeName, attribute) in entity.attributes {
+                    
+                    let attributeSQL: String
+                    
+                    switch attribute.type {
+                        
+                    case .String:
+                        attributeSQL = DataType.VarChar.rawValue + "(\(maxString))"
+                        
+                    case .Number(.Integer):
+                        attributeSQL = DataType.BigInt.rawValue
+                        
+                    case .Number(.Boolean):
+                        attributeSQL = DataType.Boolean.rawValue
+                        
+                    case .Number(.Double):
+                        attributeSQL = DataType.Double.rawValue
+                        
+                    case .Date:
+                        attributeSQL = DataType.Date.rawValue
+                        
+                    case .
+                    }
+                    
+                    statement += "," + "\n"
+                    
+                    statement += attributeName + " " + SQLAttribute
+                }
+                
+                // mark key as primary
+                
+                statement += "," + "\n"
+                
+                statement += "PRIMARY KEY (\(MySQL.Store.resourceIDColumnName))" + "\n"
+                
+                statement += ")"
             }
         }
         
