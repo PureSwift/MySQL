@@ -10,6 +10,7 @@
 		1A3806FF1BCA2006003F8492 /* MySQLSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A3806FE1BCA2006003F8492 /* MySQLSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A3807061BCA2006003F8492 /* MySQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3806FB1BCA2006003F8492 /* MySQL.framework */; };
 		1A38071A1BCA208C003F8492 /* libmysqlclient.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3807191BCA208C003F8492 /* libmysqlclient.dylib */; };
+		6E38FE3D1C1C13DD00B60454 /* FetchRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E38FE3C1C1C13DD00B60454 /* FetchRequest.swift */; };
 		6EC90CF71C1AB2F10068944A /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC90CF61C1AB2F10068944A /* Store.swift */; };
 		6EF32E9F1C19088D00E5F6A0 /* ClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E931C19088D00E5F6A0 /* ClientOption.swift */; };
 		6EF32EA01C19088D00E5F6A0 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E941C19088D00E5F6A0 /* Connection.swift */; };
@@ -131,6 +132,7 @@
 		1A38076A1BCA24F7003F8492 /* typelib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typelib.h; sourceTree = "<group>"; };
 		6E0324961C194D7E000F000B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		6E0324971C195171000F000B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6E38FE3C1C1C13DD00B60454 /* FetchRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchRequest.swift; sourceTree = "<group>"; };
 		6EC90CF61C1AB2F10068944A /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6EC90CF91C1AB6780068944A /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		6EF32E931C19088D00E5F6A0 /* ClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientOption.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 			isa = PBXGroup;
 			children = (
 				6EC90CF61C1AB2F10068944A /* Store.swift */,
+				6E38FE3C1C1C13DD00B60454 /* FetchRequest.swift */,
 			);
 			name = CoreModel;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E38FE3D1C1C13DD00B60454 /* FetchRequest.swift in Sources */,
 				6EF32EA61C19088D00E5F6A0 /* Result.swift in Sources */,
 				6EF32EA21C19088D00E5F6A0 /* DataType.swift in Sources */,
 				6EF32EA01C19088D00E5F6A0 /* Connection.swift in Sources */,

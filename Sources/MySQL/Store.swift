@@ -59,15 +59,13 @@ public extension MySQL {
         /// Creates an entity with the specified values.
         public func create(resource: CoreModel.Resource, initialValues: CoreModel.ValuesObject) throws {
             
+            
+            
             fatalError()
         }
         
         /// Deletes the specified entity.
         public func delete(resource: CoreModel.Resource) throws {
-            
-            let entityName = fetchRequest.entityName
-            
-            
             
             fatalError()
         }
