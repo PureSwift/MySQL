@@ -98,7 +98,7 @@ public extension MySQLStatement {
 
 public extension MySQLStatement {
     
-    public func bind(parameters: [ParameterBinding]) {
+    public func bind(parameters: [ParameterBinding]) throws {
         
         let bindingsPointer = UnsafeMutablePointer<MYSQL_BIND>.alloc(parameters.count)
         
@@ -106,6 +106,11 @@ public extension MySQLStatement {
             
             bindingsPointer[index] = binding.internalPointer.memory
         }
+        
+        guard mysql_stmt_bind_param(internalPointer, bindingsPointer) == 0
+            else { throw statusCodeError }
+        
+        self.parameterBindings = parameters
     }
 }
 
