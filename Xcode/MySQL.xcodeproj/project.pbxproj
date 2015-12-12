@@ -10,9 +10,10 @@
 		1A3806FF1BCA2006003F8492 /* MySQLSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A3806FE1BCA2006003F8492 /* MySQLSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A3807061BCA2006003F8492 /* MySQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3806FB1BCA2006003F8492 /* MySQL.framework */; };
 		1A38071A1BCA208C003F8492 /* libmysqlclient.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3807191BCA208C003F8492 /* libmysqlclient.dylib */; };
+		6E3761641C1BBD4F007592C6 /* ResultBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E3761631C1BBD4F007592C6 /* ResultBinding.swift */; };
 		6EC90CF71C1AB2F10068944A /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC90CF61C1AB2F10068944A /* Store.swift */; };
 		6EC90CFB1C1ABDB40068944A /* Statement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC90CFA1C1ABDB40068944A /* Statement.swift */; };
-		6EC90CFE1C1B7D1E0068944A /* Binding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC90CFD1C1B7D1E0068944A /* Binding.swift */; };
+		6EC90CFE1C1B7D1E0068944A /* ParameterBinding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC90CFD1C1B7D1E0068944A /* ParameterBinding.swift */; };
 		6EF32E9F1C19088D00E5F6A0 /* ClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E931C19088D00E5F6A0 /* ClientOption.swift */; };
 		6EF32EA01C19088D00E5F6A0 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E941C19088D00E5F6A0 /* Connection.swift */; };
 		6EF32EA11C19088D00E5F6A0 /* ConvertString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E951C19088D00E5F6A0 /* ConvertString.swift */; };
@@ -133,10 +134,11 @@
 		1A38076A1BCA24F7003F8492 /* typelib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typelib.h; sourceTree = "<group>"; };
 		6E0324961C194D7E000F000B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		6E0324971C195171000F000B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6E3761631C1BBD4F007592C6 /* ResultBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultBinding.swift; sourceTree = "<group>"; };
 		6EC90CF61C1AB2F10068944A /* Store.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		6EC90CF91C1AB6780068944A /* Cartfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Cartfile; path = ../Cartfile; sourceTree = "<group>"; };
 		6EC90CFA1C1ABDB40068944A /* Statement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Statement.swift; sourceTree = "<group>"; };
-		6EC90CFD1C1B7D1E0068944A /* Binding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Binding.swift; sourceTree = "<group>"; };
+		6EC90CFD1C1B7D1E0068944A /* ParameterBinding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParameterBinding.swift; sourceTree = "<group>"; };
 		6EF32E931C19088D00E5F6A0 /* ClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientOption.swift; sourceTree = "<group>"; };
 		6EF32E941C19088D00E5F6A0 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		6EF32E951C19088D00E5F6A0 /* ConvertString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertString.swift; sourceTree = "<group>"; };
@@ -341,8 +343,9 @@
 				6EF32E981C19088D00E5F6A0 /* Field.swift */,
 				6EF32E9A1C19088D00E5F6A0 /* Result.swift */,
 				6EF32E9B1C19088D00E5F6A0 /* Row.swift */,
-				6EC90CFD1C1B7D1E0068944A /* Binding.swift */,
 				6EC90CFA1C1ABDB40068944A /* Statement.swift */,
+				6EC90CFD1C1B7D1E0068944A /* ParameterBinding.swift */,
+				6E3761631C1BBD4F007592C6 /* ResultBinding.swift */,
 			);
 			path = MySQL;
 			sourceTree = "<group>";
@@ -479,10 +482,11 @@
 				6EF32EA21C19088D00E5F6A0 /* DataType.swift in Sources */,
 				6EF32EA01C19088D00E5F6A0 /* Connection.swift in Sources */,
 				6EF32EA11C19088D00E5F6A0 /* ConvertString.swift in Sources */,
+				6E3761641C1BBD4F007592C6 /* ResultBinding.swift in Sources */,
 				6EF32EA51C19088D00E5F6A0 /* MySQL.swift in Sources */,
 				6EC90CF71C1AB2F10068944A /* Store.swift in Sources */,
 				6EF32EA31C19088D00E5F6A0 /* Error.swift in Sources */,
-				6EC90CFE1C1B7D1E0068944A /* Binding.swift in Sources */,
+				6EC90CFE1C1B7D1E0068944A /* ParameterBinding.swift in Sources */,
 				6EF32EA41C19088D00E5F6A0 /* Field.swift in Sources */,
 				6EF32EA71C19088D00E5F6A0 /* Row.swift in Sources */,
 				6EF32E9F1C19088D00E5F6A0 /* ClientOption.swift in Sources */,

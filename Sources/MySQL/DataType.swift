@@ -8,7 +8,7 @@
 
 public extension MySQL {
     
-    public enum SQLDataType: String {
+    public enum DataType: String {
         
         case TinyInt            = "TINYINT"
         case SmallInt           = "SMALLINT"
@@ -55,17 +55,5 @@ public extension MySQL {
         case MultiPolygon       = "MULTIPOLYGON"
         case GeometryCollection = "GEOMETRYCOLLECTION"
         case JSON               = "JSON"
-    }
-}
-
-public extension MySQL {
-    
-    public enum BindingData {
-        
-        case Tiny(CChar)
-        case Short(CShort)
-        case Long(CInt)
-        case LongLong(CLongLong)
-        case Float()
     }
 }
