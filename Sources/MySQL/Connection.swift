@@ -167,7 +167,7 @@ public extension MySQL {
         
         // MARK: - Private Methods
         
-        public var statusCodeError: MySQL.Error {
+        private var statusCodeError: MySQL.Error {
             
             let errorNumber = mysql_errno(internalPointer)
             
