@@ -32,7 +32,7 @@ public extension MySQL {
         
         deinit { mysql_close(internalPointer) }
         
-        /// Attempts to establish a connection to a MySQL database engine.
+        /// Initializes connection handle
         public init() throws {
             
             self.internalPointer = mysql_init(nil)

@@ -9,60 +9,95 @@
 import SwiftFoundation
 import CMySQL
 
-public extension MySQL {
+public extension MySQL.Connection {
     
-    // Due to compiler error
-    public typealias Statement = MySQLStatement
-}
-
-public final class MySQLStatement {
-    
-    // MARK: - Properties
-    
-    public let connection: MySQL.Connection
-    
-    public let statement: String
-    
-    public let parameters: [ParameterBinding]
-    
-    public let results: [ResultBinding]
-    
-    // MARK: - Internal Methods
-    
-    internal let convertedStatement: (UnsafeMutablePointer<CChar>, Int)
-    
-    internal let internalPointer: UnsafeMutablePointer<MYSQL_STMT>
-    
-    internal let internalParametersPointer: UnsafeMutablePointer<MYSQL_BIND>
-    
-    // MARK: - Initialization
-    
-    public init(statement: String, parameters: [ParameterBinding], results: [ResultBinding], connection: MySQL.Connection) throws {
+    func executeStatement(statement: String, parameters: [MySQL.StatementParameter], results: [MySQL.StatementResultType]) throws {
         
-        // set properties...
-        self.statement = statement
-        self.connection = connection
-        self.parameters = parameters
-        self.results = results
-        
-        self.convertedStatement = convertString(statement)
-        self.internalParametersPointer = UnsafeMutablePointer<MYSQL_BIND>.alloc(parameters.count)
-        self.internalPointer = mysql_stmt_init(connection.internalPointer)
+        let statementPointer = mysql_stmt_init(self.internalPointer)
         
         // validate internal handle
-        guard self.internalPointer != nil
-            else { throw connection.statusCodeError }
+        guard statementPointer != nil
+            else { throw self.statusCodeError }
+        
+        defer { mysql_stmt_close(statementPointer) }
+        
+        // declare nested function for statement errors
+        func statementStatusCodeError() -> MySQL.Error {
+            
+            let errorNumber = mysql_stmt_errno(statementPointer)
+            
+            #if os(OSX)
+                let errorString = String.fromCString(mysql_stmt_error(statementPointer))!
+            #elseif os(Linux)
+                let errorString = ""
+            #endif
+            
+            return MySQL.Error.ErrorCode(errorNumber, errorString)
+        }
+        
+        let convertedStatement = convertString(statement)
+        defer { cleanConvertedString(convertedStatement) }
         
         // prepare statement
-        guard mysql_stmt_prepare(internalPointer, convertedStatement.0, UInt(convertedStatement.1)) == 0
-            else { throw statusCodeError }
+        guard mysql_stmt_prepare(statementPointer, convertedStatement.0, UInt(convertedStatement.1)) == 0
+            else { throw statementStatusCodeError() }
         
         // bind parameters...
+        let parametersPointer = UnsafeMutablePointer<MYSQL_BIND>.alloc(parameters.count)
+        defer { parametersPointer.dealloc(parameters.count) }
         
         // To use a MYSQL_BIND structure, zero its contents to initialize it, then set its members appropriately.
-        memset(internalParametersPointer, 0, parameters.count)
+        memset(parametersPointer, 0, parameters.count)
         
-        for (index, binding) in parameters.enumerate() {
+        for (index, parameter) in parameters.enumerate() {
+            
+            switch parameter {
+                
+            case .Null:
+                parametersPointer[index].buffer_type = MYSQL_TYPE_NULL
+                
+            case let .Tiny(value):
+                parametersPointer[index].buffer_type = MYSQL_TYPE_TINY
+                let buffer = UnsafeMutablePointer<CChar>.alloc(1)
+                defer { buffer.dealloc(1) }
+                buffer.initialize(value)
+                parametersPointer[index].buffer = UnsafeMutablePointer<Void>(buffer)
+                
+            case let .Short(value):
+                parametersPointer[index].buffer_type = MYSQL_TYPE_SHORT
+                let buffer = UnsafeMutablePointer<CShort>.alloc(1)
+                defer { buffer.dealloc(1) }
+                buffer.initialize(value)
+                parametersPointer[index].buffer = UnsafeMutablePointer<Void>(buffer)
+                
+            case let .Long(value):
+                parametersPointer[index].buffer_type = MYSQL_TYPE_LONG
+                let buffer = UnsafeMutablePointer<CInt>.alloc(1)
+                defer { buffer.dealloc(1) }
+                buffer.initialize(value)
+                parametersPointer[index].buffer = UnsafeMutablePointer<Void>(buffer)
+                
+            case let .LongLong(value):
+                parametersPointer[index].buffer_type = MYSQL_TYPE_LONGLONG
+                let buffer = UnsafeMutablePointer<CLongLong>.alloc(1)
+                defer { buffer.dealloc(1) }
+                buffer.initialize(value)
+                parametersPointer[index].buffer = UnsafeMutablePointer<Void>(buffer)
+                
+            case let .Float(value):
+                parametersPointer[index].buffer_type = MYSQL_TYPE_FLOAT
+                let buffer = UnsafeMutablePointer<CFloat>.alloc(1)
+                defer { buffer.dealloc(1) }
+                buffer.initialize(value)
+                parametersPointer[index].buffer = UnsafeMutablePointer<Void>(buffer)
+                
+            case let .Double(value):
+                parametersPointer[index].buffer_type = MYSQL_TYPE_DOUBLE
+                let buffer = UnsafeMutablePointer<CDouble>.alloc(1)
+                defer { buffer.dealloc(1) }
+                buffer.initialize(value)
+                parametersPointer[index].buffer = UnsafeMutablePointer<Void>(buffer)
+            }
             
             let internalBinding = binding.internalBinding
             
@@ -74,41 +109,14 @@ public final class MySQLStatement {
         }
         
         guard mysql_stmt_bind_param(internalPointer, internalParametersPointer) == 0
-            else { throw statusCodeError }
+            else { throw statementStatusCodeError() }
         
-        // bind results... 
+        // bind results...
         guard mysql_stmt_bind_result(<#T##stmt: UnsafeMutablePointer<MYSQL_STMT>##UnsafeMutablePointer<MYSQL_STMT>#>, <#T##bnd: UnsafeMutablePointer<MYSQL_BIND>##UnsafeMutablePointer<MYSQL_BIND>#>)
-    }
-    
-    deinit {
         
-        mysql_stmt_close(internalPointer)
-        
-        internalParametersPointer.dealloc(parameters.count)
-        cleanConvertedString(convertedStatement)
-    }
-    
-    // MARK: - Methods
-    
-    public func execute() throws {
-        
+        // execute statement
         guard mysql_stmt_execute(internalPointer) == 0
-            else { throw statusCodeError }
-    }
-    
-    // MARK: - Private Methods
-    
-    internal var statusCodeError: MySQL.Error {
-        
-        let errorNumber = mysql_stmt_errno(internalPointer)
-        
-        #if os(OSX)
-            let errorString = String.fromCString(mysql_stmt_error(internalPointer))!
-        #elseif os(Linux)
-            let errorString = ""
-        #endif
-        
-        return MySQL.Error.ErrorCode(errorNumber, errorString)
+            else { throw statementStatusCodeError() }
     }
 }
 
