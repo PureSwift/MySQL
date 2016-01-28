@@ -34,7 +34,7 @@ public extension MySQL {
                 
                 let length = fieldLengths[i]
                 
-                let data = DataFromBytePointer(fieldValuePointer, length: Int(length))
+                let data = Data.fromBytePointer(fieldValuePointer, length: Int(length))
                 
                 values.append(data)
             }

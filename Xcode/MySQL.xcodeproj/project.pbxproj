@@ -10,6 +10,7 @@
 		1A3806FF1BCA2006003F8492 /* MySQLSwift.h in Headers */ = {isa = PBXBuildFile; fileRef = 1A3806FE1BCA2006003F8492 /* MySQLSwift.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1A3807061BCA2006003F8492 /* MySQL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3806FB1BCA2006003F8492 /* MySQL.framework */; };
 		1A38071A1BCA208C003F8492 /* libmysqlclient.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3807191BCA208C003F8492 /* libmysqlclient.dylib */; };
+		6E6669C71C59D92F009AC895 /* JSON.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 6E6669C61C59D926009AC895 /* JSON.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		6EF32E9F1C19088D00E5F6A0 /* ClientOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E931C19088D00E5F6A0 /* ClientOption.swift */; };
 		6EF32EA01C19088D00E5F6A0 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E941C19088D00E5F6A0 /* Connection.swift */; };
 		6EF32EA11C19088D00E5F6A0 /* ConvertString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF32E951C19088D00E5F6A0 /* ConvertString.swift */; };
@@ -42,6 +43,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				6E6669C71C59D92F009AC895 /* JSON.framework in Copy Frameworks */,
 				6EF32EAE1C1909ED00E5F6A0 /* SwiftFoundation.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -130,6 +132,7 @@
 		1A38076A1BCA24F7003F8492 /* typelib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = typelib.h; sourceTree = "<group>"; };
 		6E0324961C194D7E000F000B /* Package.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Package.swift; path = ../Package.swift; sourceTree = "<group>"; };
 		6E0324971C195171000F000B /* main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		6E6669C61C59D926009AC895 /* JSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JSON.framework; path = ../Carthage/Build/Mac/JSON.framework; sourceTree = "<group>"; };
 		6EF32E931C19088D00E5F6A0 /* ClientOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientOption.swift; sourceTree = "<group>"; };
 		6EF32E941C19088D00E5F6A0 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		6EF32E951C19088D00E5F6A0 /* ConvertString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertString.swift; sourceTree = "<group>"; };
@@ -341,6 +344,7 @@
 		6EF32EAB1C1909B600E5F6A0 /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				6E6669C61C59D926009AC895 /* JSON.framework */,
 				6EF32EAC1C1909CF00E5F6A0 /* SwiftFoundation.framework */,
 				1A3807191BCA208C003F8492 /* libmysqlclient.dylib */,
 			);
